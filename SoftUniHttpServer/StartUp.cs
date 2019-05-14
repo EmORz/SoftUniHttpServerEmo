@@ -8,21 +8,21 @@ namespace SoftUniHttpServer
     public class StartUp
     {
         private const int Port = 80;
-        private const int V = 10000;
+        private const int Buffer = 10000;
 
         public static void Main(string[] args)
         {
-            TcpListener tcpListener = new TcpListener(IPAddress.Loopback, Port);
+            var tcpListener = new TcpListener(IPAddress.Loopback, Port);
             tcpListener.Start();
             //
 
             while (true)
             {
-                TcpClient client = tcpListener.AcceptTcpClient();
+                var client = tcpListener.AcceptTcpClient();
 
                 using (NetworkStream stream = client.GetStream())
                 {
-                    var requestBytes = new byte[V];
+                    var requestBytes = new byte[Buffer];
                     var readBytes = stream.Read(requestBytes, 0, requestBytes.Length);
                     var stringRequest = Encoding.UTF8.GetString(requestBytes, 0, readBytes);
                     Console.WriteLine(new string('=', 70));
