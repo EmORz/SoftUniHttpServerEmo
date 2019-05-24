@@ -26,10 +26,7 @@ namespace SoftUniHttpServer
 
                 Task.Run(() =>
                 ProcessingClient(client));
-                
-
             }
-
         }
 
         public static async Task ProcessingClient(TcpClient client)
@@ -48,6 +45,7 @@ namespace SoftUniHttpServer
                 var responseBody = DateTime.Now.ToString();
                 var response = "HTTP/1.0 200 OK" + NewLine
                     + "Content-Type: text/html" + NewLine
+                    + "Set-Cookie: cookie1=test" + NewLine
                     //+ "Location: https://google.com" + NewLine
 
                     + "Server: MyCustomServer/1.0" + NewLine +
